@@ -48,8 +48,11 @@
         this.load.image('righthand', 'assets/righthand.png');
         this.load.image('lefthand', 'assets/lefthand.png');
         this.load.audio('theme', ['assets/audio/SuperSonic.mp3']);
+        this.load.audio('sfx', ['assets/audio/Slapsound.mp3']);
 
     }
+
+     var effect;
 
     function create ()
     {
@@ -62,6 +65,8 @@
 
         var music = this.sound.add('theme');
         music.play();
+
+        effect = game.sound.add('sfx');
         	
         victim = this.physics.add.sprite(400, 200, 'faces');
         victim.width = 200;
@@ -112,11 +117,13 @@
     }
 
     function slapRight(count) {
+        effect.play();
         victim.anims.play('right', true);
         updateSlapCountText(count);
     }
 
     function slapLeft(count) {
+        effect.play();
         victim.anims.play('left', true);
         updateSlapCountText(count);
     }
