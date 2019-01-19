@@ -33,6 +33,8 @@
     };
 
     var game = new Phaser.Game(config);
+    var slapCount = 0;
+    var slapCountText;
 
     function preload ()
     {
@@ -45,7 +47,6 @@
 
         this.load.image('righthand', 'assets/righthand.png');
         this.load.image('lefthand', 'assets/lefthand.png');
-        this.load.audio('theme', ['assets/audio/SuperSonic.mp3']);
 
     }
 
@@ -53,10 +54,6 @@
     {
         this.add.image(400, 300, 'sky');
         platforms = this.physics.add.staticGroup();
-
-        var music = this.sound.add('theme');
-        music.play();
-
         	
         victim = this.physics.add.sprite(400, 200, 'faces');
         victim.width = 200;
@@ -81,40 +78,35 @@
             frameRate: 10,
         });
 
+       
         leftbtn = this.add.image(150, 400, 'lefthand');
         leftbtn.setInteractive();
         leftbtn.on('pointerover', () => { console.log('pointeroverleft'); });
+        leftbtn.on('pointerdown', () => slapLeft(++slapCount) );
 
         rightbtn = this.add.image(700, 400, 'righthand');
         rightbtn.setInteractive();
         rightbtn.on('pointerover', () => { console.log('pointeroverright'); });
+        rightbtn.on('pointerdown', () => slapRight(++slapCount) );
 
-         //  Input Events
-        cursors = this.input.keyboard.createCursorKeys();
+    }
+
+    function updateSlapCountText(count) {
+        //slapCountText.setText('slap count: ' + count);
+    }
+
+    function slapRight(count) {
+        victim.anims.play('right', true);
+        updateSlapCountText(count);
+    }
+
+    function slapLeft(count) {
+        victim.anims.play('left', true);
+        updateSlapCountText(count);
     }
 
     function update ()
     {
-
-        if (cursors.left.isDown)
-        {
-            victim.anims.play('left', true);
-        }
-        else if (cursors.right.isDown)
-        {
-            victim.anims.play('right', true);
-        }
-        // else
-        // {
-        //     player.setVelocityX(0);
-
-        //     player.anims.play('turn');
-        // }
-
-        // if (cursors.up.isDown && player.body.touching.down)
-        // {
-        //     player.setVelocityY(-330);
-        // }
     }
 
 </script>
