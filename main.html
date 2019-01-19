@@ -6,8 +6,20 @@
     <link rel="icon" href="/assets/normalheadicon.png" type="image/png">
     <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <style type="text/css">
-    body {
+    html, body {
+        width: 62.45%;
+        height: 40%;
         margin: 0;
+    }
+    .button {
+        background-color: #f44336; 
+        color: white;
+        text-align: center;
+        font-size: 20px;
+    }
+    .text{
+        text-align: center;
+        font-size: 20px;
     }
 </style>
 </head>
@@ -153,9 +165,9 @@
         victim.height = 200;
         victim.setDisplaySize(370,370);
 
-        slapCountText = this.add.bitmapText(550, 90, 'myfont', '', 23);
+        slapCountText = this.add.bitmapText(520, 90, 'myfont', '', 25);
 
-        title = this.add.bitmapText(90, 20, 'myfont', '', 40);
+        title = this.add.bitmapText(15, 20, 'myfont', '', 35);
 
         //FACE
         this.anims.create({
@@ -330,10 +342,13 @@
 
 
 </script>
+
+
+<div style="background-color:white; color:black; padding:10px;">
     <center>
         <form class="add-name" method="get">
-            <input type="text" name="name" id="name" placeholder="Input enemy's name">
-            <input type="button" value="Slap!" onClick="runName()">
+            <input type="text" class = "text" name="name" maxlength="7" id="name"  placeholder="Input enemy's name here...">
+            <input type="button" class="button" value=" Slap! " onClick="runName()" >
         </form>
 
         <script type="text/javascript">
@@ -341,8 +356,9 @@
                 name = document.getElementById('name').value;
                 update();
             }
-            </script>
+        </script>
     </center>
+</div>
 
 
 </body>
