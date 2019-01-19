@@ -147,7 +147,7 @@
         victim.height = 200;
         victim.setDisplaySize(370,370);
 
-        slapCountText = this.add.text(400, 50, '');
+        slapCountText = this.add.bitmapText(550, 90, 'myfont', '', 23);
 
         title = this.add.bitmapText(90, 20, 'myfont', '', 40);
 
@@ -199,13 +199,13 @@
     }
 
     function updateSlapCountText(count) {
-        slapCountText.setText('slap count: ' + count);
+        slapCountText.setText('slap count ' + count);
     }
 
     function slapRight() {
         effect.play();
-        victim.anims.play('left', true);
         if(this.isleft) {
+            victim.anims.play('left', true);
             rightbtn.anims.play('handright', true);
             slapCount++;
             updateSlapCountText(slapCount);
