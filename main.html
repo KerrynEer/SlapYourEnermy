@@ -83,10 +83,33 @@
         rightbtn = this.add.image(700, 400, 'righthand');
         rightbtn.setInteractive();
         rightbtn.on('pointerover', () => { console.log('pointeroverright'); });
+
+         //  Input Events
+        cursors = this.input.keyboard.createCursorKeys();
     }
 
     function update ()
     {
+
+        if (cursors.left.isDown)
+        {
+            victim.anims.play('left', true);
+        }
+        else if (cursors.right.isDown)
+        {
+            victim.anims.play('right', true);
+        }
+        // else
+        // {
+        //     player.setVelocityX(0);
+
+        //     player.anims.play('turn');
+        // }
+
+        // if (cursors.up.isDown && player.body.touching.down)
+        // {
+        //     player.setVelocityY(-330);
+        // }
     }
 
 </script>
