@@ -47,11 +47,9 @@
     //     { frameWidth: 50, frameHeight: 50 }
     // );
     this.load.image('normalhead', 'assets/normalhead.png');
-    this.load.audio('music1', ['assets/audio/SuperSonic.mp3']);
+
 
     }
-
-    var music;
 
     function create ()
     {
@@ -62,9 +60,6 @@
 
         //victim = this.physics.add.sprite(100, 300, 'normalhead');
         this.add.image(400, 300, 'normalhead');
-        music = this.add.audio('music1');
-
-        music.play();
 
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
