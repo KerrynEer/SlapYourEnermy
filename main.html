@@ -202,6 +202,9 @@
         leftbtn.setDisplaySize(200,250);
         rightbtn.setDisplaySize(200,250);
 
+        rightbtn.input.enabled = false;
+        leftbtn.input.enabled = false;
+
         instrOverlay = this.add.image(400, 300, 'overlay')
         instruction = this.add.bitmapText(400, 250, 'myfont', '', 30);
         instruction.setText('Start slapping with your left!\n Alternate subsequently\n press to start');
@@ -277,6 +280,8 @@
         startbtn.destroy();
         instruction.destroy();
         instrOverlay.destroy();
+        rightbtn.input.enabled = true;
+        leftbtn.input.enabled = true;
         title.setText('Slap as many as you can!');
     }
 
@@ -285,8 +290,8 @@
     }
 
     function slapRight() {
-        effect.play();
         if(this.isleft) {
+            effect.play();
             victim.anims.play('left', true);
             rightbtn.anims.play('handright', true);
             slapCount++;
@@ -297,9 +302,9 @@
     }
 
     function slapLeft() {
-        effect.play();
         victim.anims.play('right', true);
         if(!this.isleft) {
+            effect.play();
             leftbtn.anims.play('handleft', true);
             slapCount++;
             updateSlapCountText(slapCount);
