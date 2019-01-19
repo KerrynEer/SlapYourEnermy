@@ -319,7 +319,7 @@
         var timeString = addZeros(minutes) + ":" + addZeros(seconds);
         
         //check if the time is up
-        if (timeLeftInSeconds == 0){
+        if (timeLeftInSeconds <= 0){
             //remove timer from the game
             timedEvent.remove(); //here
             //add other code here
@@ -327,9 +327,10 @@
         } else if (slapCount >= 10){
             timeLeftInSeconds = timeLeftInSeconds + 5;
 
-        }
+        } else {
        
         timeText.setText(timeString);
+        }
     }
 
     function onEvent () {}
