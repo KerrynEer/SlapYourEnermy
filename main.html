@@ -209,6 +209,9 @@
 
         startbtn = this.add.image(400, 500, 'startbtn').setInteractive().on('pointerdown', () => startGame());
 
+        //Cursors
+        cursors = this.input.keyboard.createCursorKeys();
+
         // //TIMER
         var timedEvent;
         var timeText;
@@ -307,7 +310,16 @@
 
     function update ()
     {
-        //title.setText('Slap ' + name +' as many as you can!');
+        title.setText('Slap ' + name +' as many as you can!');
+
+        //Cursors
+        if (cursors.left.isDown) {
+            slapLeft();
+        }
+        else if (cursors.right.isDown)
+        {
+            slapRight();
+        }
         //updateTime();
     }
 
