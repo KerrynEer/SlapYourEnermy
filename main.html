@@ -17,14 +17,14 @@
     var config = {
         type: Phaser.AUTO,
         width: 800,
-        height: 600,
+        height:600,
 		physics: {
 			default: 'arcade',
 			arcade: {
-				gravity: { y: 300 },
 				debug: false
-			}
-    },
+            }
+			
+        },
         scene: {
             preload: preload,
             create: create,
@@ -36,50 +36,41 @@
 
     function preload ()
     {
-       // this.load.image('sky', 'assets/sky.png');
-    this.load.spritesheet('dude', 
-        'assets/dude.png',
-        { frameWidth: 50, frameHeight: 50 }
-    );
+        this.load.image('sky', 'assets/sky.png');
 
-    // this.load.spritesheet('normalhead', 
-    //     'assets/normalhead.png',
-    //     { frameWidth: 50, frameHeight: 50 }
-    // );
-    this.load.image('normalhead', 'assets/normalhead.png');
-
+        this.load.spritesheet('faces', 
+            'assets/faces.png',
+            { frameWidth: 800, frameHeight: 800 }
+        );
 
     }
 
     function create ()
     {
-        //this.add.image(400, 300, 'sky');
+        this.add.image(400, 300, 'sky');
         platforms = this.physics.add.staticGroup();
         	
-        player = this.physics.add.sprite(100, 450, 'dude');
-
-        //victim = this.physics.add.sprite(100, 300, 'normalhead');
-        this.add.image(400, 300, 'normalhead');
-
-        player.setBounce(0.2);
-        player.setCollideWorldBounds(true);
+        victim = this.physics.add.sprite(400, 200, 'faces');
+        victim.width = 200;
+        victim.height = 200;
+        victim.setDisplaySize(400,400);
 
         this.anims.create({
             key: 'left',
-            frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+            frames: this.anims.generateFrameNumbers('faces', { start: 0, end: 0 }),
             frameRate: 10,
             repeat: -1
         });
 
         this.anims.create({
             key: 'turn',
-            frames: [ { key: 'dude', frame: 4 } ],
+            frames: [ { key: 'faces', frame: 1 } ],
             frameRate: 20
         });
 
         this.anims.create({
             key: 'right',
-            frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+            frames: this.anims.generateFrameNumbers('faces', { start: 2, end: 2 }),
             frameRate: 10,
             repeat: -1
         });
