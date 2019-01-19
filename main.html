@@ -324,8 +324,8 @@
             //remove timer from the game
             timedEvent.remove(); //here
             //add other code here
-            //gameOver = true;
             timeText.setText("Time's Up!");
+            gameOver = true;
         } else if (slapCount >= 10){
             timeLeftInSeconds = timeLeftInSeconds + 5;
         } else {
