@@ -47,6 +47,7 @@
 
         this.load.image('righthand', 'assets/righthand.png');
         this.load.image('lefthand', 'assets/lefthand.png');
+        this.load.audio('theme', ['assets/audio/SuperSonic.mp3']);
 
     }
 
@@ -54,6 +55,9 @@
     {
         this.add.image(400, 300, 'sky');
         platforms = this.physics.add.staticGroup();
+
+        var music = this.sound.add('theme');
+        music.play();
         	
         victim = this.physics.add.sprite(400, 200, 'faces');
         victim.width = 200;
