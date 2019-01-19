@@ -7,7 +7,7 @@
     <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <style type="text/css">
     html, body {
-        width: 62.45%;
+        width: 76.51%;
         height: 40%;
         margin: 0;
     }
@@ -15,11 +15,11 @@
         background-color: #f44336; 
         color: white;
         text-align: center;
-        font-size: 20px;
+        font-size: 18px;
     }
     .text{
         text-align: center;
-        font-size: 20px;
+        font-size: 18px;
     }
 </style>
 </head>
@@ -52,6 +52,7 @@
     var effect;
     var title;
     var name = '';
+    var nametag;
 
     function preload ()
     {
@@ -166,8 +167,8 @@
         victim.setDisplaySize(370,370);
 
         slapCountText = this.add.bitmapText(520, 90, 'myfont', '', 25);
-
         title = this.add.bitmapText(15, 20, 'myfont', '', 35);
+        nametag = this.add.bitmapText(335, 500, 'myfont', '', 30);
 
         //FACE
         this.anims.create({
@@ -219,7 +220,7 @@
 
         instrOverlay = this.add.image(400, 300, 'overlay')
         instruction = this.add.bitmapText(400, 250, 'myfont', '', 30);
-        instruction.setText('Start slapping with your left!\n Alternate subsequently\n press to start');
+        instruction.setText('Start slapping with your left!\nAlternate subsequently\nPsress to start');
         instruction.setOrigin(0.5);
 
         startbtn = this.add.image(400, 500, 'startbtn').setInteractive().on('pointerdown', () => startGame());
@@ -328,6 +329,7 @@
     function update ()
     {
         title.setText('Slap ' + name +' as many as you can!');
+        nametag.setText(name);
 
         //Cursors
         if (cursors.left.isDown) {
@@ -347,7 +349,7 @@
 <div style="background-color:white; color:black; padding:10px;">
     <center>
         <form class="add-name" method="get">
-            <input type="text" class = "text" name="name" maxlength="7" id="name"  placeholder="Input enemy's name here...">
+            <input type="text" class = "text" name="name" maxlength="7" id="name"  placeholder=" Input enemy's name here ">
             <input type="button" class="button" value=" Slap! " onClick="runName()" >
         </form>
 
