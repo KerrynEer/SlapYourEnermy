@@ -233,6 +233,9 @@
 
         startbtn = this.add.image(400, 500, 'startbtn').setInteractive().on('pointerdown', () => startGame());
 
+        overtext = this.add.bitmapText(200, 250, 'myfont', '', 30);
+        score = this.add.bitmapText(200, 400, 'myfont', '', 30);
+
         //Cursors
         cursors = this.input.keyboard.createCursorKeys();
 
@@ -258,7 +261,7 @@
     function startGame() {
         startbtn.destroy();
         instruction.destroy();
-        instrOverlay.destroy();
+        instrOverlay.visible = false;
         rightbtn.input.enabled = true;
         leftbtn.input.enabled = true;
         title.setText('Slap as many as you can!');
@@ -334,10 +337,9 @@
     }
 
     function gameOverScreen() {
-        endingOverlay = this.add.image(400, 300, 'overlay');
-        overtext = this.add.bitmapText(200, 250, 'myfont', '', 30);
-        instruction.setText('GAME OVER');
-        score = this.add.bitmapText(200, 400, 'myfont', '', 30);
+        //endingOverlay = this.add.image(400, 300, 'overlay');
+        overtext.setText('GAME OVER');
+        instrOverlay.visible = true;
         score.setText(slapCount);
     }
 
