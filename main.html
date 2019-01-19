@@ -45,6 +45,8 @@
     {
         //THINGS NEEDED TO LOAD
         this.load.image('background', 'assets/greenblue.jpg');
+        this.load.image('overlay', 'assets/transclusent.png');
+        this.load.image('startbtn', 'assets/startBtn.png');
         this.load.image('enemy body', 'assets/Body.png');
         this.load.spritesheet('enemy face', 
             'assets/faces.png',
@@ -200,6 +202,13 @@
         leftbtn.setDisplaySize(200,250);
         rightbtn.setDisplaySize(200,250);
 
+        instrOverlay = this.add.image(400, 300, 'overlay')
+        instruction = this.add.bitmapText(400, 250, 'myfont', '', 30);
+        instruction.setText('Start slapping with your left!\n Alternate subsequently\n press to start');
+        instruction.setOrigin(0.5);
+
+        startbtn = this.add.image(400, 500, 'startbtn').setInteractive().on('pointerdown', () => startGame());
+
         // //TIMER
         var timedEvent;
         var timeText;
@@ -261,6 +270,13 @@
     // }
 
 
+      function startGame() {
+        startbtn.destroy();
+        instruction.destroy();
+        instrOverlay.destroy();
+        title.setText('Slap as many as you can!');
+    }
+
     function updateSlapCountText(count) {
         slapCountText.setText('slap count ' + count);
     }
@@ -291,7 +307,7 @@
 
     function update ()
     {
-        title.setText('Slap ' + name +' as many as you can!');
+        //title.setText('Slap ' + name +' as many as you can!');
         //updateTime();
     }
 
