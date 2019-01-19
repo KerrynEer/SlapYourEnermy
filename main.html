@@ -39,7 +39,7 @@
     var isleft = false;
     var effect;
     var title;
- 
+    var name = '';
 
     function preload ()
     {
@@ -291,12 +291,26 @@
 
     function update ()
     {
-        title.setText('Slap as many as you can!');
+        title.setText('Slap ' + name +' as many as you can!');
         //updateTime();
     }
 
 
 </script>
+    <center>
+        <form class="add-name" method="get">
+            <input type="text" name="name" id="name" placeholder="Input enemy's name">
+            <input type="button" value="Slap!" onClick="runName()">
+        </form>
+
+        <script type="text/javascript">
+            function runName() {
+                name = document.getElementById('name').value;
+                update();
+            }
+            </script>
+    </center>
+
 
 </body>
 </html>
