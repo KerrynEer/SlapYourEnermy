@@ -202,19 +202,19 @@
         leftbtn.setDisplaySize(200,250);
         rightbtn.setDisplaySize(200,250);
 
-        //TIMER
-        text = this.add.text(90, 20, "0:00",  {fontSize: '32px', fill: '#800000',});
-        //After delay seconds, the callback will beinvoked and internally the event will berecycled for later use.
-        timedEvent = this.time.addEvent({ 
-            delay: giventime, 
-            callback: onEvent, 
-            args: [],
-            callbackScope: this,
-            loop: false,
-            repeat: 0,
-            startAt: 0,
-            paused: false
-        });
+        // //TIMER
+        // text = this.add.text(90, 20, "0:00",  {fontSize: '32px', fill: '#800000',});
+        // //After delay seconds, the callback will beinvoked and internally the event will berecycled for later use.
+        // timedEvent = this.time.addEvent({ 
+        //     delay: giventime, 
+        //     callback: onEvent, 
+        //     args: [],
+        //     callbackScope: this,
+        //     loop: false,
+        //     repeat: 0,
+        //     startAt: 0,
+        //     paused: false
+        // });
 
     }
 
@@ -249,40 +249,40 @@
     {
         title.setText('Slap as many as you can!');
 
-        //elapsed time
-        var progress = timedEvent.getElapsedSeconds();
-        //timedEvent.getProgress()/1000;   
-        var timeLeftInSeconds = (giventime/1000) - progress;
-        //find how many complete min are left
-        var minutes = Math.floor(timeLeftInSeconds/60);
-        //find the no. of seconds left (not countig the minutes)
-        var seconds = Math.floor(timeLeftInSeconds - (minutes*60));
-        //a string that shows the time
-        var timeString = addZeros(minutes) + ":" + addZeros(seconds);
-        //check if the time is up
-        if (timeLeftInSeconds == 0){
-            //remove timer from the game
-            timer.remove();
-            //add other code here
-            timeText.setText("Game Over");
-        }
+        // //elapsed time
+        // var progress = timedEvent.getElapsedSeconds();
+        // //timedEvent.getProgress()/1000;   
+        // var timeLeftInSeconds = (giventime/1000) - progress;
+        // //find how many complete min are left
+        // var minutes = Math.floor(timeLeftInSeconds/60);
+        // //find the no. of seconds left (not countig the minutes)
+        // var seconds = Math.floor(timeLeftInSeconds - (minutes*60));
+        // //a string that shows the time
+        // var timeString = addZeros(minutes) + ":" + addZeros(seconds);
+        // //check if the time is up
+        // if (timeLeftInSeconds == 0){
+        //     //remove timer from the game
+        //     timer.remove();
+        //     //add other code here
+        //     timeText.setText("Game Over");
+        // }
 
-        timeText.setText('Time left: ' + timeString);
+        // timeText.setText('Time left: ' + timeString);
     }
 
-    //add leading zeros to any number less than 10
-    function addZeros(num) {
-            if (num < 10) {
-                num = "0" + num;
-            }
-            return num;
-    }
+    // //add leading zeros to any number less than 10
+    // function addZeros(num) {
+    //         if (num < 10) {
+    //             num = "0" + num;
+    //         }
+    //         return num;
+    // }
 
-    function onEvent ()
-    {
-        timer.paused = true;
-        image.setScale(0.5);
-    }
+    // function onEvent ()
+    // {
+    //     timer.paused = true;
+    //     image.setScale(0.5);
+    // }
 
 
 </script>
