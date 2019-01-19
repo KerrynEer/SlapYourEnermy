@@ -59,10 +59,10 @@
     {
         this.add.image(400, 300, 'sky');
 
-        victimBody = this.add.image(400, 240, 'Body');
+        victimBody = this.add.image(400, 500, 'Body');
         victimBody.width = 200;
         victimBody.height = 200;
-        victimBody.setDisplaySize(1000,1000);
+        victimBody.setDisplaySize(300,300);
 
         var music = this.sound.add('theme');
         music.play();
@@ -73,7 +73,6 @@
         victim.width = 200;
         victim.height = 200;
         victim.setDisplaySize(370,370);
-
 
         slapCountText = this.add.text(400, 50, '');
 
