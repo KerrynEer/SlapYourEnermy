@@ -42,7 +42,7 @@
         this.load.image('Body', 'assets/Body.png');
         this.load.spritesheet('faces', 
             'assets/faces.png',
-            { frameWidth: 900, frameHeight: 800 }
+            { frameWidth: 900, frameHeight: 820 }
         );
 
         this.load.image('righthand', 'assets/righthand.png');
@@ -58,17 +58,17 @@
     {
         this.add.image(400, 300, 'sky');
 
-        victimBody = this.add.image(400, 300, 'Body');
+        victimBody = this.add.image(400, 240, 'Body');
         victimBody.width = 200;
         victimBody.height = 200;
-        victimBody.setDisplaySize(450,450);
+        victimBody.setDisplaySize(1000,1000);
 
         var music = this.sound.add('theme');
         music.play();
 
         effect = game.sound.add('sfx');
         	
-        victim = this.physics.add.sprite(400, 200, 'faces');
+        victim = this.physics.add.sprite(400, 230, 'faces');
         victim.width = 200;
         victim.height = 200;
         victim.setDisplaySize(370,370);
@@ -77,13 +77,13 @@
         slapCountText = this.add.text(400, 50, '');
 
         this.anims.create({
-            key: 'left',
+            key: 'mid',
             frames: this.anims.generateFrameNumbers('faces', { start: 0, end: 0 }),
             frameRate: 10,
         });
 
         this.anims.create({
-            key: 'turn',
+            key: 'left',
             frames: [ { key: 'faces', frame: 1 } ],
             frameRate: 20
         });
@@ -118,13 +118,13 @@
 
     function slapRight(count) {
         effect.play();
-        victim.anims.play('right', true);
+        victim.anims.play('left', true);
         updateSlapCountText(count);
     }
 
     function slapLeft(count) {
         effect.play();
-        victim.anims.play('left', true);
+        victim.anims.play('right', true);
         updateSlapCountText(count);
     }
 
