@@ -43,6 +43,9 @@
             { frameWidth: 800, frameHeight: 800 }
         );
 
+        this.load.image('righthand', 'assets/righthand.png');
+        this.load.image('lefthand', 'assets/lefthand.png');
+
     }
 
     function create ()
@@ -59,7 +62,6 @@
             key: 'left',
             frames: this.anims.generateFrameNumbers('faces', { start: 0, end: 0 }),
             frameRate: 10,
-            repeat: -1
         });
 
         this.anims.create({
@@ -72,8 +74,15 @@
             key: 'right',
             frames: this.anims.generateFrameNumbers('faces', { start: 2, end: 2 }),
             frameRate: 10,
-            repeat: -1
         });
+
+        leftbtn = this.add.image(150, 400, 'lefthand');
+        leftbtn.setInteractive();
+        leftbtn.on('pointerover', () => { console.log('pointeroverleft'); });
+
+        rightbtn = this.add.image(700, 400, 'righthand');
+        rightbtn.setInteractive();
+        rightbtn.on('pointerover', () => { console.log('pointeroverright'); });
     }
 
     function update ()
