@@ -61,6 +61,7 @@
     var progress;
     var timeLeftInSeconds;
     var gameOver = false;
+    var notYetGameOver = true;
 
     function preload ()
     {
@@ -69,6 +70,7 @@
         this.load.image('overlay', 'assets/transclusent.png');
         this.load.image('startbtn', 'assets/startBtn.png');
         this.load.image('enemy body', 'assets/Body.png');
+        this.load.image('bruised', 'assets/Bruisedhead.png');
         this.load.spritesheet('enemy face', 
             'assets/faces.png',
             { frameWidth: 900, frameHeight: 820 }
@@ -236,6 +238,9 @@
         overtext = this.add.bitmapText(200, 250, 'myfont', '', 30);
         score = this.add.bitmapText(200, 400, 'myfont', '', 30);
 
+        bruisedFace = this.add.image(300, 100, 'bruised');
+        bruisedFace.setDisplaySize(300,300);
+
         //Cursors
         cursors = this.input.keyboard.createCursorKeys();
 
@@ -262,6 +267,7 @@
         startbtn.destroy();
         instruction.destroy();
         instrOverlay.visible = false;
+        bruisedFace.visible = false;
         rightbtn.input.enabled = true;
         leftbtn.input.enabled = true;
         title.setText('Slap as many as you can!');
@@ -336,9 +342,15 @@
 
     function gameOverScreen() {
         //endingOverlay = this.add.image(400, 300, 'overlay');
+        notYetGameOver = false;
         overtext.setText('GAME OVER');
         instrOverlay.visible = true;
         score.setText(slapCount);
+
+        rightbtn.input.enabled = false;
+        leftbtn.input.enabled = false;
+        bruisedFace.visible = true;
+
     }
 
     function onEvent () {}
@@ -350,11 +362,11 @@
         nametag.setText(name);
 
         //Cursors
-        if (cursors.left.isDown) {
+        if (cursors.left.isDown && notYetGameOver) {
             slapLeft();
         }
 
-        else if (cursors.right.isDown)
+        else if (cursors.right.isDown && notYetGameOver)
         {
             slapRight();
         }
