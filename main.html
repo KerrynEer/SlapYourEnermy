@@ -60,6 +60,7 @@
     var giventime = 10000; //10 seconds
     var progress;
     var timeLeftInSeconds;
+    var gameOver = false;
 
     function preload ()
     {
@@ -225,7 +226,7 @@
         rightbtn.input.enabled = false;
         leftbtn.input.enabled = false;
 
-        instrOverlay = this.add.image(400, 300, 'overlay')
+        instrOverlay = this.add.image(400, 300, 'overlay');
         instruction = this.add.bitmapText(400, 250, 'myfont', '', 30);
         instruction.setText('Start slapping with your left!\nAlternate subsequently\nPsress to start');
         instruction.setOrigin(0.5);
@@ -323,14 +324,21 @@
             //remove timer from the game
             timedEvent.remove(); //here
             //add other code here
+            //gameOver = true;
             timeText.setText("Time's Up!");
         } else if (slapCount >= 10){
             timeLeftInSeconds = timeLeftInSeconds + 5;
-
         } else {
-       
-        timeText.setText(timeString);
+            timeText.setText(timeString);
         }
+    }
+
+    function gameOverScreen() {
+        endingOverlay = this.add.image(400, 300, 'overlay');
+        overtext = this.add.bitmapText(200, 250, 'myfont', '', 30);
+        instruction.setText('GAME OVER');
+        score = this.add.bitmapText(200, 400, 'myfont', '', 30);
+        score.setText(slapCount);
     }
 
     function onEvent () {}
@@ -345,12 +353,18 @@
         if (cursors.left.isDown) {
             slapLeft();
         }
+
         else if (cursors.right.isDown)
         {
             slapRight();
         }
+
         if (timedEvent.paused != true){
             updateTime();
+        }
+
+        if(gameOver) {
+            gameOverScreen();
         }
     }
 
