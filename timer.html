@@ -1,0 +1,127 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>Making your first Phaser 3 Game - Part 10</title>
+    <title>Slap your enemy></title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+
+</head>
+<body>
+
+<script type="text/javascript">
+
+var config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
+    scene: {
+       preload: preload,
+        create: create,
+        update: update
+    }
+};
+
+var image;
+
+var timedEvent;
+var text;
+var s;
+
+var game = new Phaser.Game(config);
+
+function preload() {
+
+    this.load.image('sky', 'assets/sky.png');
+
+}
+
+var giventime = 60000;//30 seconds 
+
+function create() {
+
+    image = this.add.image(400, 300, 'sky');
+
+    text = this.add.text(90, 20, "0:00",  {fontSize: '32px', fill: '#800000',});
+    
+    texttrial = this.add.text(70, 40, "0:00",  {fontSize: '32px', fill: '#800000',});
+    texttrials = this.add.text(50, 60, "0:00",  {fontSize: '32px', fill: '#800000',});
+    //After delay seconds, the callback will beinvoked and internally the event will berecycled for later use.
+    timedEvent = this.time.addEvent({ 
+        delay: giventime, 
+        callback: onEvent, 
+        args: [],
+        callbackScope: this,
+        loop: false,
+        repeat: 0,
+        startAt: 0,
+        paused: false
+    });
+
+}
+
+var progress;
+var minutes;
+var seconds;
+var timeString;
+
+
+function update ()
+{
+    //increasing s aka elapsed time
+    progress = timedEvent.getElapsedSeconds();
+    //timedEvent.getProgress()/1000;
+    
+    var timeLeftInSeconds = (giventime/1000) - progress;
+
+    //find how many complete min are left
+    minutes = Math.floor(timeLeftInSeconds/60);
+    //find the no. of seconds left (not countig the minutes)
+
+    seconds = Math.floor(timeLeftInSeconds - (minutes*60));
+    //a string that shows the time
+    timeString = addZeros(minutes) + ":" + addZeros(seconds);
+    //check if the time is up
+    if (timeLeftInSeconds == 0){
+        //remove timer from the game
+       timer.remove();
+        //add other code here
+        text.setText("Game Over");
+    }
+    texttrials.setText(timeLeftInSeconds);
+   texttrial.setText(seconds);
+    text.setText('Event.progress: ' + timeString);
+}
+
+//add leading zeros to any number less than 10
+function addZeros(num) {
+        if (num < 10) {
+            num = "0" + num;
+        }
+        return num;
+}
+
+
+function onEvent ()
+{
+    timer.paused = true;
+    image.setScale(0.5);
+}
+
+</script>
+
+
+</body>
+</html>
