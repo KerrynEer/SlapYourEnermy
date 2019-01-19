@@ -35,6 +35,7 @@
     var game = new Phaser.Game(config);
     var slapCount = 0;
     var slapCountText;
+    var isleft = false;
 
     function preload ()
     {
@@ -98,12 +99,12 @@
         leftbtn = this.add.image(150, 400, 'lefthand');
         leftbtn.setInteractive();
         leftbtn.on('pointerover', () => { console.log('pointeroverleft'); });
-        leftbtn.on('pointerdown', () => slapLeft(++slapCount) );
+        leftbtn.on('pointerdown', () => slapLeft() );
 
         rightbtn = this.add.image(700, 400, 'righthand');
         rightbtn.setInteractive();
         rightbtn.on('pointerover', () => { console.log('pointeroverright'); });
-        rightbtn.on('pointerdown', () => slapRight(++slapCount) );
+        rightbtn.on('pointerdown', () => slapRight() );
 
         leftbtn.setDisplaySize(200,250);
         rightbtn.setDisplaySize(200,250);
@@ -116,18 +117,27 @@
         slapCountText.setText('slap count: ' + count);
     }
 
-    function slapRight(count) {
-        effect.play();
-        victim.anims.play('left', true);
-        updateSlapCountText(count);
-    }
-
-    function slapLeft(count) {
+    function slapRight() {
         effect.play();
         victim.anims.play('right', true);
-        updateSlapCountText(count);
+        if(this.isleft) {
+            slapCount++;
+            updateSlapCountText(slapCount);
+        }
+        isleft = false;
+        console.log('false');
     }
 
+    function slapLeft() {
+        effect.play();
+        victim.anims.play('left', true);
+        if(!this.isleft) {
+            slapCount++;
+           updateSlapCountText(slapCount);
+        }
+        isleft = true;
+        console.log('true');
+    }
     function update ()
     {
     }
