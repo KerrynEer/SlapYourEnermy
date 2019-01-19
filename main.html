@@ -91,6 +91,8 @@
         rightbtn.on('pointerover', () => { console.log('pointeroverright'); });
         rightbtn.on('pointerdown', () => slapRight(++slapCount) );
 
+        title = this.add.text(90,20, 'Slap as many times as you can', {fontSize: '32px', fill: '#800000',})
+
     }
 
     function updateSlapCountText(count) {
