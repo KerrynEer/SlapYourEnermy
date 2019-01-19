@@ -5,25 +5,25 @@
     <title>Slap Your Enermy</title>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <style type="text/css">
-        body {
-            margin: 0;
-        }
-    </style>
+    body {
+        margin: 0;
+    }
+</style>
 </head>
 <body>
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    var config = {
-        type: Phaser.AUTO,
-        width: 800,
-        height:600,
-		physics: {
-			default: 'arcade',
-			arcade: {
-				debug: false
+        var config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height:600,
+            physics: {
+             default: 'arcade',
+             arcade: {
+                debug: false
             }
-			
+
         },
         scene: {
             preload: preload,
@@ -44,16 +44,19 @@
         this.load.spritesheet('faces', 
             'assets/faces.png',
             { frameWidth: 900, frameHeight: 820 }
-        );
+            );
 
-        this.load.image('righthand', 'assets/righthand.png');
-        this.load.image('lefthand', 'assets/lefthand.png');
+        this.load.spritesheet('slaps', 'assets/slapsheet.png', 
+            {frameWidth: 1180, frameHeight:1100});
+        //this.load.image('righthand', 'assets/righthand.png');
+        //this.load.image('lefthand', 'assets/lefthand.png');
+
         this.load.audio('theme', ['assets/audio/SuperSonic.mp3']);
         this.load.audio('sfx', ['assets/audio/Slapsound.mp3']);
 
     }
 
-     var effect;
+    var effect;
 
     function create ()
     {
@@ -68,7 +71,7 @@
         music.play();
 
         effect = game.sound.add('sfx');
-        	
+
         victim = this.physics.add.sprite(400, 230, 'faces');
         victim.width = 200;
         victim.height = 200;
@@ -94,16 +97,39 @@
             frameRate: 10,
         });
 
-       
-        leftbtn = this.add.image(150, 400, 'lefthand');
+        this.anims.create({
+            key: 'handright',
+            frames: this.anims.generateFrameNumbers('slaps', { start: 3, end: 3 }),
+            frameRate: 10,
+        });
+
+        this.anims.create({
+            key: 'handleft',
+            frames: this.anims.generateFrameNumbers('slaps', { start: 1, end: 1 }),
+            frameRate: 10,
+        });
+
+        this.anims.create({
+            key: 'endright',
+            frames: this.anims.generateFrameNumbers('slaps', { start: 2, end: 2 }),
+            frameRate: 10,
+        });
+
+        this.anims.create({
+            key: 'endleft',
+            frames: this.anims.generateFrameNumbers('slaps', { start: 0, end: 0 }),
+            frameRate: 10,
+        });
+
+        leftbtn = this.add.sprite(150, 400, 'slaps', 0);
         leftbtn.setInteractive();
         leftbtn.on('pointerover', () => { console.log('pointeroverleft'); });
-        leftbtn.on('pointerdown', () => slapLeft() );
+        leftbtn.on('pointerdown', () =>  slapLeft());
 
-        rightbtn = this.add.image(700, 400, 'righthand');
+        rightbtn = this.add.sprite(700, 400, 'slaps', 2);
         rightbtn.setInteractive();
         rightbtn.on('pointerover', () => { console.log('pointeroverright'); });
-        rightbtn.on('pointerdown', () => slapRight() );
+        rightbtn.on('pointerdown', () => slapRight());
 
         leftbtn.setDisplaySize(200,250);
         rightbtn.setDisplaySize(200,250);
@@ -120,8 +146,10 @@
         effect.play();
         victim.anims.play('left', true);
         if(this.isleft) {
+            rightbtn.anims.play('handright', true);
             slapCount++;
             updateSlapCountText(slapCount);
+            rightbtn.anims.play('endright', true);
         }
         isleft = false;
         console.log('false');
@@ -131,8 +159,10 @@
         effect.play();
         victim.anims.play('right', true);
         if(!this.isleft) {
+            leftbtn.anims.play('handleft', true);
             slapCount++;
-           updateSlapCountText(slapCount);
+            updateSlapCountText(slapCount);
+            leftbtn.anims.play('endleft', true);
         }
         isleft = true;
         console.log('true');
