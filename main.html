@@ -60,6 +60,8 @@
         victim.height = 200;
         victim.setDisplaySize(400,400);
 
+        slapCountText = this.add.text(400, 50, '');
+
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('faces', { start: 0, end: 0 }),
@@ -92,7 +94,7 @@
     }
 
     function updateSlapCountText(count) {
-        //slapCountText.setText('slap count: ' + count);
+        slapCountText.setText('slap count: ' + count);
     }
 
     function slapRight(count) {
