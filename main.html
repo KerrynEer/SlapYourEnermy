@@ -181,6 +181,10 @@
         nametag = this.add.bitmapText(335, 500, 'myfont', '', 25);
 
         //FACE
+        bruisedFace = this.add.image(400, 290, 'bruised');
+        bruisedFace.setDisplaySize(855,650);
+        bruisedFace.visible = false;
+
         this.anims.create({
             key: 'mid',
             frames: this.anims.generateFrameNumbers('enemy face', { start: 0, end: 0 }),
@@ -235,12 +239,10 @@
 
         startbtn = this.add.image(400, 500, 'startbtn').setInteractive().on('pointerdown', () => startGame());
 
-        overtext = this.add.bitmapText(200, 250, 'myfont', '', 30);
-        score = this.add.bitmapText(200, 400, 'myfont', '', 30);
+        overtext = this.add.bitmapText(220, 540, 'myfont', '', 60);
+        score = this.add.bitmapText(150, 400, 'myfont', '', 30);
 
-        bruisedFace = this.add.image(300, 100, 'bruised');
-        bruisedFace.setDisplaySize(300,300);
-
+ 
         //Cursors
         cursors = this.input.keyboard.createCursorKeys();
 
@@ -267,7 +269,6 @@
         startbtn.destroy();
         instruction.destroy();
         instrOverlay.visible = false;
-        bruisedFace.visible = false;
         rightbtn.input.enabled = true;
         leftbtn.input.enabled = true;
         title.setText('Slap as many as you can!');
@@ -345,11 +346,12 @@
         notYetGameOver = false;
         overtext.setText('GAME OVER');
         instrOverlay.visible = true;
-        score.setText(slapCount);
+        score.setText("You slapped " + name + " " + slapCount + " times!");
 
         rightbtn.input.enabled = false;
         leftbtn.input.enabled = false;
         bruisedFace.visible = true;
+        victim.visible = false;
 
     }
 
